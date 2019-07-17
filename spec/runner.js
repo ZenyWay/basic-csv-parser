@@ -21,14 +21,14 @@
 
 const { getCsvParser } = require('../')
 
-exports.runCsvParserTests = function runCsvParserTests(t, specs) {
+exports.runCsvParserTests = function runCsvParserTests (t, specs) {
   for (var i = 0; i < specs.length; i++) {
     runCsvParserTest(t, specs[i])
   }
   t.end()
 }
 
-function runCsvParserTest(t, spec) {
+function runCsvParserTest (t, spec) {
   const config = spec.config || {}
   const disabled =
     spec.disabled ||
@@ -43,7 +43,7 @@ function runCsvParserTest(t, spec) {
     (config.quoteChar && config.quoteChar !== '"')
   // console.log(spec.description, config)
   if (disabled) return t.skip(spec.description)
-  t.test(spec.description, function(st) {
+  t.test(spec.description, function (st) {
     try {
       const { delimiter, escapeChar, header, newline } = config
       const parse = getCsvParser({
@@ -61,6 +61,6 @@ function runCsvParserTest(t, spec) {
   })
 }
 
-function isFunction(val) {
+function isFunction (val) {
   return typeof val === 'function'
 }

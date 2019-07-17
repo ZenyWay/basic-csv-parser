@@ -18,10 +18,7 @@ const DEFAULTS = {
   delimiter: ',',
   escape: '"',
   postprocess (escape: string) {
-    const escapedDoubleQuoteRegExp = new RegExp(
-      `${escapeRegExp(escape)}"`,
-      'g'
-    )
+    const escapedDoubleQuoteRegExp = new RegExp(`${escapeRegExp(escape)}"`, 'g')
     return (field: string) => field.replace(escapedDoubleQuoteRegExp, '"') // unescape
   }
 }
@@ -47,9 +44,9 @@ export function getCsvParser<T = string[]> (
   return !header
     ? parse
     : function (input: string) {
-      const data = parse(input)
-      return foldToObjects<T>(data.shift(), data)
-    }
+        const data = parse(input)
+        return foldToObjects<T>(data.shift(), data)
+      }
 }
 
 const NEWLINE_TOKENS = ['\r\n', '\r', '\n']
@@ -66,12 +63,12 @@ function getCoreCsvParser (config: Partial<CORE_CSV_PARSER_SPEC>) {
     !input
       ? []
       : splitEntries(input.match(CSV_TOKENIZER_REGEXP))
-        .filter(entry => entry.length)
-        .map(entry =>
-          splitFields(entry).map((field, index) =>
-            postprocess(trimQuotes(field[0] || ''), index)
+          .filter(entry => entry.length)
+          .map(entry =>
+            splitFields(entry).map((field, index) =>
+              postprocess(trimQuotes(field[0] || ''), index)
+            )
           )
-        )
 }
 
 function getCsvTokenizerRegExp (spec: CSV_TOKENIZER_SPEC) {
@@ -86,10 +83,13 @@ function getCsvTokenizerRegExp (spec: CSV_TOKENIZER_SPEC) {
 function foldToObjects<T = {}> (keys: string[], entries: string[][]) {
   const key = keys ? index => keys[index] || index : index => index
   return entries.map(entry =>
-    entry.reduce(function (props, value, index) {
-      props[key(index)] = value
-      return props
-    }, {} as T)
+    entry.reduce(
+      function (props, value, index) {
+        props[key(index)] = value
+        return props
+      },
+      Object.create(null) as T
+    )
   )
 }
 

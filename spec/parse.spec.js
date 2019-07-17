@@ -203,7 +203,7 @@ test('Parse Tests', t =>
       input: 'A,B,C\r\na,b,c',
       config: {
         header: true,
-        transformHeader: function(header) {
+        transformHeader: function (header) {
           return header.toLowerCase()
         }
       },
@@ -308,7 +308,7 @@ test('Parse Tests', t =>
       description: 'Callback delimiter',
       input: 'a$ b$ c',
       config: {
-        delimiter: function(input) {
+        delimiter: function (input) {
           return input[1] + ' '
         }
       },
@@ -392,7 +392,7 @@ test('Parse Tests', t =>
       description: 'Dynamic typing by indices can be determined by function',
       input: '001,002,003',
       config: {
-        dynamicTyping: function(field) {
+        dynamicTyping: function (field) {
           return field % 2 === 0
         }
       },
@@ -406,7 +406,7 @@ test('Parse Tests', t =>
       input: 'A_as_int,B,C_as_int\r\n001,002,003',
       config: {
         header: true,
-        dynamicTyping: function(field) {
+        dynamicTyping: function (field) {
           return /_as_int$/.test(field)
         }
       },
@@ -428,7 +428,7 @@ test('Parse Tests', t =>
       description: 'Custom transform function is applied to values',
       input: 'A,B,C\r\nd,e,f',
       config: {
-        transform: function(value) {
+        transform: function (value) {
           return value.toLowerCase()
         }
       },
@@ -441,7 +441,7 @@ test('Parse Tests', t =>
       description: 'Custom transform accepts column number also',
       input: 'A,B,C\r\nd,e,f',
       config: {
-        transform: function(value, column) {
+        transform: function (value, column) {
           if (column % 2) {
             value = value.toLowerCase()
           }
@@ -458,7 +458,7 @@ test('Parse Tests', t =>
       input: 'A,B,C\r\nd,e,f',
       config: {
         header: true,
-        transform: function(value, name) {
+        transform: function (value, name) {
           if (name === 'B') {
             value = value.toUpperCase()
           }

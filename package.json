@@ -1,12 +1,13 @@
 {
   "name": "basic-csv-parser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "lightweight (1kb gzip, no dependencies) csv string parser for the browser",
   "main": "dist/index.min.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "predist": "mkdirp dist && rimraf dist/*",
     "dist": "tsc -p src --outDir dist",
+    "format": "prettier-standard \"{bin,src,spec,stories,stubs}/**/*.[jt]@(s|sx)\"",
     "postdist": "npm run uglify",
     "prepublish": "npm run test",
     "pretest": "npm run dist",

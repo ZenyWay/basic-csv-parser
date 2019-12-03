@@ -75,7 +75,7 @@ function getCsvTokenizerRegExp (spec: CSV_TOKENIZER_SPEC) {
   const escape = escapeRegExp(spec.escape)
   const delimiter = escapeRegExp(spec.delimiter)
   return new RegExp(
-    `"(?:${escape}"|[^"])*"|(?:${escape}"|[^\r\n${delimiter}"])+|${delimiter}|\r\n|\r|\n`,
+    `"(?:${escape}${escape}|${escape}"|[^"])*"|(?:${escape}${escape}|${escape}"|[^\r\n${delimiter}"])+|${delimiter}|\r\n|\r|\n`,
     'g'
   )
 }
